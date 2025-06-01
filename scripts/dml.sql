@@ -59,11 +59,10 @@ SELECT DISTINCT
 FROM mock_data;
 
 INSERT INTO fact_sales (
-    sale_id, customer_id, seller_id, product_id, store_id, 
-    supplier_id, sale_date, sale_quantity, sale_total_price
+    customer_id, seller_id, product_id, store_id, 
+    supplier_id, sale_date, sale_quantity, sale_total_price, original_sale_id
 )
 SELECT 
-    m.id,
     c.customer_id,
     s.seller_id,
     p.product_id,
@@ -71,7 +70,8 @@ SELECT
     sp.supplier_id,
     TO_DATE(m.sale_date, 'MM/DD/YYYY'),
     m.sale_quantity,
-    m.sale_total_price
+    m.sale_total_price,
+    m.id
 FROM mock_data m
 JOIN dim_customer c ON m.customer_email = c.email
 JOIN dim_seller s ON m.seller_email = s.email

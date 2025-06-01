@@ -114,7 +114,7 @@ CREATE TABLE dim_supplier (
 );
 
 CREATE TABLE fact_sales (
-    sale_id INTEGER PRIMARY KEY,
+    sale_id SERIAL PRIMARY KEY,
     customer_id INTEGER REFERENCES dim_customer(customer_id),
     seller_id INTEGER REFERENCES dim_seller(seller_id),
     product_id INTEGER REFERENCES dim_product(product_id),
@@ -122,5 +122,6 @@ CREATE TABLE fact_sales (
     supplier_id INTEGER REFERENCES dim_supplier(supplier_id),
     sale_date DATE,
     sale_quantity INTEGER,
-    sale_total_price NUMERIC
+    sale_total_price NUMERIC,
+    original_sale_id INTEGER
 );
